@@ -36,6 +36,13 @@ Make sure you have docker and docker-compose. Run
 $ docker-compose up
 ```
 
+Django Credential:
+
+* username: johndoe 
+* password: supersecret 
+* password for normal user: quickbrownfox
+
+
 ## Flag
 
 * User Management
