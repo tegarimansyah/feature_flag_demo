@@ -3,7 +3,7 @@
         <div class="flex flex-col bg-gray-700 md:flex-row w-screen">
             <Sidebar />
 
-            <div class="main-content flex-1 ml-48 mt-24 pb-24 md:pb-5 content-center bg-white">
+            <div class="main-content flex-1 ml-48 pb-24 md:pb-5 content-center bg-white">
 
                 <div class="bg-blue-darker p-2 shadow text-xl">
                     <h3 class="pl-2">Ticketing System</h3>
