@@ -52,3 +52,9 @@ Django Credential:
 * Transaction
 * Ticketing System
 * Server Monitoring
+
+Flag DB:
+
+```
+$ docker run -it -p 18000:18000 -v $(pwd)/feature_flag/data:/data checkr/flagr 
+```

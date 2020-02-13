@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: backend_django
+    ports:
+    - "8000:8000"
+  frontend:
+    build: frontend
+    ports:
+    - "80:80"
+  flagr:
+    image: checkr/flagr
+    ports:
+    - "18000:18000"
+    volumes:
+    - ./feature_flag/data:/data
