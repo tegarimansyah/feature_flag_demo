@@ -9,18 +9,40 @@
       </h2>
       <br />
       <h2 class="subtitle">Please Login</h2>
-      <form method="POST" action="/dashboard">
+      <form method="POST" @submit="checkForm">
         <input id="username" class="input-form" type="text" name="username" placeholder="Username"/>
         <input id="password" class="input-form" type="text" name="password" placeholder="Password"/>
-        <input class="btn btn-blue" type="submit" />
+        <input class="btn btn-blue" type="submit"/>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  
+  data() {
+    return {
+      login_credential: {
+        "username":"sam",
+        "password":"quickbrownfox"
+      },
+      errors: []
+    }
+  },
+
+  methods: {
+    checkForm(e) {
+      e.preventDefault()
+      axios.post('http://localhost:8001/api/token/', this.login_credential)
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((err) => {
+          this.errors.push(err)
+        })
+    }
+  }
 }
 </script>
 
