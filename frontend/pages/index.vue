@@ -10,8 +10,8 @@
       <br />
       <h2 class="subtitle">Please Login</h2>
       <form method="POST" @submit="checkForm">
-        <input id="username" class="input-form" type="text" name="username" placeholder="Username"/>
-        <input id="password" class="input-form" type="text" name="password" placeholder="Password"/>
+        <input id="username" class="input-form" type="text" name="username" placeholder="Username" v-model="username" />
+        <input id="password" class="input-form" type="password" name="password" placeholder="Password" v-model="password"/>
         <input class="btn btn-blue" type="submit"/>
       </form>
     </div>
@@ -27,21 +27,46 @@ export default {
         "username":"sam",
         "password":"quickbrownfox"
       },
-      errors: []
+      errors: [],
+      username: '',
+      password: ''
     }
   },
-
+  mounted(){
+    if (localStorage.username) {
+      this.username = localStorage.username
+    }
+  },
+  watch: {
+    username(newUsername){
+      localStorage.username = newUsername
+    }
+  },
   methods: {
-    checkForm(e) {
+    parseJwt: function(token) {
+      try {
+        return JSON.parse(atob(token.split('.')[1]));
+      } catch (e) {
+        console.log(e)
+        return null;
+      }
+    },
+    checkForm: function(e) {
       e.preventDefault()
+      console.log(`${this.username} - ${this.password}`)
+      this.login_credential = {
+        username: this.username,
+        password: this.password
+      }
       axios.post('http://localhost:8001/api/token/', this.login_credential)
         .then((response) => {
-          console.log(response.data)
+          localStorage.feature_list = JSON.stringify(this.parseJwt(response.data.access).feature_list)
+          this.$router.push('/dashboard')
         })
         .catch((err) => {
           this.errors.push(err)
         })
-    }
+    },
   }
 }
 </script>
@@ -54,7 +79,7 @@ export default {
 }
 */
 .container {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   min-height: 100vh;
   display: flex;
   justify-content: center;
