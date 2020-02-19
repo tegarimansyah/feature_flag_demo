@@ -24,8 +24,8 @@ export default {
   data() {
     return {
       login_credential: {
-        "username":"sam",
-        "password":"quickbrownfox"
+        "username":"",
+        "password":""
       },
       errors: [],
       username: '',
@@ -61,6 +61,7 @@ export default {
       axios.post('http://localhost:8001/api/token/', this.login_credential)
         .then((response) => {
           localStorage.feature_list = JSON.stringify(this.parseJwt(response.data.access).feature_list)
+          localStorage.last_update = Date()
           this.$router.push('/dashboard')
         })
         .catch((err) => {
