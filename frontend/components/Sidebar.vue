@@ -33,6 +33,14 @@
                         <i class="fa fa-wallet pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-grey-dark md:text-grey-light block md:inline-block">Server Monitoring</span>
                     </a>
                 </li>
+                <!-- Last Update -->
+                <li class="mr-3 flex-1">
+                    <a href="#" class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-grey-darkest hover:border-red hover:bg-gray-600">
+                        <span class="pb-1 md:pb-0 text-xs md:text-base text-grey-dark md:text-grey-light block md:inline-block">Last Update</span>
+                        <span class="pb-1 md:pb-0 text-xs md:text-base text-grey-dark md:text-grey-light block md:inline-block">{{last_update}}</span>
+                    </a>
+                    
+                </li>
             </ul>
         </div>
     </div>
@@ -41,11 +49,12 @@
 export default {
     data() {
         return {
-            feature_list: JSON.parse(localStorage.feature_list)
+            feature_list: JSON.parse(localStorage.feature_list),
+            last_update: localStorage.last_update
         }
     },
     mounted(){
-        if (!this.feature_list) {
+        if (!this.feature_list || !this.last_update) {
             return this.$router.push('/')
         }
     },
